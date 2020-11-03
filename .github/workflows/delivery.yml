@@ -3,12 +3,12 @@ name: Delivery
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
   GCP_REGION: ${{ secrets.GCP_REGION }}
-  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT }}/sekoh-front:${{ github.sha }}
+  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT }}/gcr-repo-name:${{ github.sha }}
 
 jobs:
   delivery:
@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy sekoh-front \
+          gcloud run deploy gcr-repo-name \
             --image $IMAGE \
             --project $GCP_PROJECT \
             --region $GCP_REGION \
